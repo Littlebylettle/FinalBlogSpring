@@ -3,8 +3,6 @@ package com.sparta.lv2blogspring.repository;
 import com.sparta.lv2blogspring.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 public interface PostRepository extends JpaRepository<Post,Long> {
-    List<Post> findAllByOrderByCreateAtDesc();
+
 }

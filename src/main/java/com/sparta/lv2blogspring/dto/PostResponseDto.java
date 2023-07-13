@@ -1,33 +1,28 @@
 package com.sparta.lv2blogspring.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sparta.lv2blogspring.entity.Post;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 
 @Getter
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Setter
 public class PostResponseDto {
-    private Boolean success;
     private Long id;
     private String title;
-    private String name;
-    private String contents;
+    private String content;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private String username;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
-        this.name = post.getName();
-        this.contents = post.getContent();
-        this.createdAt = post.getCreateAt();
+        this.content = post.getContent();
+        this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
-    }
-
-    public PostResponseDto(Boolean success) {
-        this.success = success;
+        this.username = post.getUser().getUsername();
     }
 }
