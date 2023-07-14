@@ -5,6 +5,7 @@ import com.sparta.lv2blogspring.dto.ApiResponseDto;
 import com.sparta.lv2blogspring.dto.PostListResponseDto;
 import com.sparta.lv2blogspring.dto.PostRequestDto;
 import com.sparta.lv2blogspring.dto.PostResponseDto;
+import com.sparta.lv2blogspring.entity.User;
 import com.sparta.lv2blogspring.security.UserDetailsImpl;
 import com.sparta.lv2blogspring.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -62,4 +63,17 @@ public class PostController {
             return ResponseEntity.badRequest().body(new ApiResponseDto("작성자만 삭제 할 수 있습니다.", HttpStatus.BAD_REQUEST.value()));
         }
     }
+
+    @PostMapping("/posts/{id}/like")
+    public ResponseEntity<ApiResponseDto> likePost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
+        postService.likePost(id, userDetails.getUser());
+        return null; //수정해야함 -> try catch
+    }
+
+    @DeleteMapping("/posts/{id}like")
+    public ResponseEntity<ApiResponseDto> deleteLikePost(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long id) {
+        postService.deletelikePost(id, userDetails.getUser());
+        return null; //수정해야함 -> try catch
+    }
+
 }

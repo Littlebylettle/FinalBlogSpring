@@ -30,6 +30,9 @@ public class Post extends TimeStamped {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)  //mappedBy -> 부모 , cascade = 영속성 전이 -> 부모와 같이 삭제된다
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<PostLike> postLikes;
+
     public Post(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
