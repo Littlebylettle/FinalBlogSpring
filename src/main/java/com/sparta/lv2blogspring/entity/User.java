@@ -21,9 +21,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING) //enum클래스를 엔티티의 컬럼으로 사용하려면 저장 형태를 지정해주어야 함
+    private UserRoleEnum role; //권한
 
-    public User(String username, String password) {
+
+    public User(String username, String password, UserRoleEnum role) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 }

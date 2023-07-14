@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -21,9 +23,12 @@ public class Post extends TimeStamped {
     @Column(nullable = false)
     private String content;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)  //mappedBy -> 부모 , cascade = 영속성 전이 -> 부모와 같이 삭제된다
+    private List<Comment> comments;
 
     public Post(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
